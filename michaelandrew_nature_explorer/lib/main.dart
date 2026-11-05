@@ -11,26 +11,100 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Nature Explorer',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+  
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreenAccent),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomeScreen(), debugShowCheckedModeBanner: false,
+    );
+  }
+}
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Nature Explorer'), 
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              
+              SizedBox(height:35),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Row(
+                  children: [
+                    _buildGalleryImage('https://picsum.photos/id/10/200/300'),
+                    const Center(),
+                  ],
+                ),
+              ),
+              SizedBox(height:24),
+              Text(
+                "A Peaceful Natural Escape",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height:20),
+              Text(
+                "Discover, Explore, Reconnect.",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+              SizedBox(height:12),
+              Text(
+                'Discover the beauty of nature through breathtaking landscapes, peaceful forests, and stunning mountain views. Explore remarkable destinations, enjoy the fresh air, and reconnect with the natural world. From quiet lakes to scenic trails, every journey offers a new experience. Let Nature inspire your next adventure and create unforgettable memories along the way.',
+                style: TextStyle(
+                  fontSize: 14,
+                  
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.justify,
+
+              ),
+              Text(
+              'Gallery',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight:FontWeight.bold, 
+              ),
+              ),
+              SizedBox(height:12),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    _buildGalleryImage('https://picsum.photos/id/10/200/300'),
+                    const SizedBox(width: 10),
+                    _buildGalleryImage('https://picsum.photos/id/29/300/200'),
+                    const SizedBox(width: 10),
+                    _buildGalleryImage('https://picsum.photos/id/37/200/300'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildGalleryImage(String url){
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Image.network(url, height:300,width:150, fit: BoxFit.cover,
+      ),
     );
   }
 }
